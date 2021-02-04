@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         score = 0;
+        setScore(score);
     }
 
     public void initializeCellWithState(int cellId, State state) {
