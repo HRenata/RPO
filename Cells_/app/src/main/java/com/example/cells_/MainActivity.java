@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
         cellStates = new State[N][M];
 
+        initializeGame();
+    }
+
+    public void initializeGame() {
         for (int i = 0; i < N; ++i) {
             for (int j = 0; j < M; ++j) {
                 cellStates[i][j] = State.ORIGIN;
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         initializeAllCellsWithOriginalState();
         initializeStartButton();
         setCellsUnenabled();
+        initializeInvisibleRestartButton();
     }
 
     public void initializeAllCellsWithOriginalState() {
@@ -108,12 +113,25 @@ public class MainActivity extends AppCompatActivity {
         button.setBackgroundColor(Color.CYAN);
     }
 
+    public void initializeVisibleRestartButton() {
+        Button button = (Button) findViewById(R.id.buttonRestart);
+        button.setVisibility(View.VISIBLE);
+        button.setBackgroundColor(Color.CYAN);
+    }
+
+    public void initializeInvisibleRestartButton() {
+        Button button = (Button) findViewById(R.id.buttonRestart);
+        button.setVisibility(View.INVISIBLE);
+        button.setBackgroundColor(Color.CYAN);
+    }
+
     public void initializeVictory() {
         Button button = (Button) findViewById(R.id.buttonNextColor);
         button.setText("YOU WON\n SCORE: " + String.valueOf(score));
         button.setEnabled(true);
         button.setBackgroundColor(Color.CYAN);
         setCellsUnenabled();
+        initializeInvisibleRestartButton();
     }
 
     public void initializeLoss() {
@@ -122,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         button.setEnabled(true);
         button.setBackgroundColor(Color.CYAN);
         setCellsUnenabled();
+        initializeInvisibleRestartButton();
     }
 
     public void setCellsUnenabled() {
@@ -155,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         initializeAllCellsWithOriginalState();
         setCellsEnabled();
         randNextColor();
+        initializeVisibleRestartButton();
     }
 
     public void clickOnCell(View view) {
@@ -309,5 +329,9 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < N; ++i) {
             initializeCellWithState(actionsIds[i][j], State.ORIGIN);
         }
+    }
+
+    public void clickOnRestart(View view) {
+        initializeGame();
     }
 }
