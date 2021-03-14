@@ -75,14 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 MovieListAdapter.OnStateClickListener stateClickListener = new MovieListAdapter.OnStateClickListener() {
                     @Override
                     public void onStateClick(Movie state, int position) {
-                        //формируем данные для отправки в муви айтем активити
-                        Intent intent = new Intent(getApplicationContext(), MovieItemActivity.class);
-                        intent.putExtra("title", state.getTitle());
-                        intent.putExtra("date", state.getReleaseDate());
-                        intent.putExtra("vote", state.getVoteAverage().toString());
-                        intent.putExtra("overview", state.getOverview());
-                        intent.putExtra("path", state.getPosterPath());
-                        startActivity(intent);
+                        createNewActivityWithData(state);
                     }
                 };
 
@@ -120,14 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 MovieListAdapter.OnStateClickListener stateClickListener = new MovieListAdapter.OnStateClickListener() {
                     @Override
                     public void onStateClick(Movie state, int position) {
-                        //формируем данные для отправки в муви айтем активити
-                        Intent intent = new Intent(getApplicationContext(), MovieItemActivity.class);
-                        intent.putExtra("title", state.getTitle());
-                        intent.putExtra("date", state.getReleaseDate());
-                        intent.putExtra("vote", state.getVoteAverage().toString());
-                        intent.putExtra("overview", state.getOverview());
-                        intent.putExtra("path", state.getPosterPath());
-                        startActivity(intent);
+                        createNewActivityWithData(state);
                     }
                 };
 
@@ -142,6 +128,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    public void createNewActivityWithData(Movie state) {
+        //формируем данные для отправки в муви айтем активити
+        Intent intent = new Intent(getApplicationContext(), MovieItemActivity.class);
+        intent.putExtra("title", state.getTitle());
+        intent.putExtra("date", state.getReleaseDate());
+        intent.putExtra("vote", state.getVoteAverage().toString());
+        intent.putExtra("overview", state.getOverview());
+        intent.putExtra("path", state.getPosterPath());
+        startActivity(intent);
+    }
 
 }
