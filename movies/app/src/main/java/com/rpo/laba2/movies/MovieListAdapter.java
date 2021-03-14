@@ -27,6 +27,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
         this.onClickListener = onClickListener;
     }
 
+    public List<Movie> getMovieList() {
+        return movieList;
+    }
+
     public class MovieViewHolder extends RecyclerView.ViewHolder{
         TextView title;
         ImageView poster;
