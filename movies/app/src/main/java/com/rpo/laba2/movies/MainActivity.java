@@ -104,11 +104,6 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
 
-                //
-                recyclerView = findViewById(R.id.rvMovieList);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
                 // определяем слушателя нажатия элемента в списке
                 MovieListAdapter.OnStateClickListener stateClickListener = new MovieListAdapter.OnStateClickListener() {
                     @Override
