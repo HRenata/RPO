@@ -62,23 +62,23 @@ public class MainActivity extends AppCompatActivity {
 
         MovieApiService movieApiService = retrofit.create(MovieApiService.class);
 
+        recyclerView = findViewById(R.id.rvMovieList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        // определяем слушателя нажатия элемента в списке
+        MovieListAdapter.OnStateClickListener stateClickListener = new MovieListAdapter.OnStateClickListener() {
+            @Override
+            public void onStateClick(Movie state, int position) {
+                createNewActivityWithData(state);
+            }
+        };
+
         //запрос к апи
         Call<TopRatedResponse> call = movieApiService.getTopMovies("top_rated", API_KEY);
         call.enqueue(new Callback<TopRatedResponse>() {
             @Override
             public void onResponse(Call<TopRatedResponse> call, Response<TopRatedResponse> response) {
-                recyclerView = findViewById(R.id.rvMovieList);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-                // определяем слушателя нажатия элемента в списке
-                MovieListAdapter.OnStateClickListener stateClickListener = new MovieListAdapter.OnStateClickListener() {
-                    @Override
-                    public void onStateClick(Movie state, int position) {
-                        createNewActivityWithData(state);
-                    }
-                };
-
                 // создаем адаптер
                 MovieListAdapter adapter = new MovieListAdapter(response.body().getResult(), stateClickListener);
 
@@ -103,14 +103,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Нет доступа к сети и сохраненных данных",
                             Toast.LENGTH_SHORT).show();
                 }
-
-                // определяем слушателя нажатия элемента в списке
-                MovieListAdapter.OnStateClickListener stateClickListener = new MovieListAdapter.OnStateClickListener() {
-                    @Override
-                    public void onStateClick(Movie state, int position) {
-                        createNewActivityWithData(state);
-                    }
-                };
 
                 List<Movie> movieList = moviesDb.getMovieList();
 
